@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test css</title>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+  <div>
+    <input class="flex-button" type="button" value="click">
+  </div>
+
+  <div>
+    <input draggable="true" class="flex-button" type="button" value="click">
+  </div>
+
+  <div>
+    <textarea id="container"></textarea>
+  </div>
+
+  <script type="text/javascript">
+    container.addEventListener('paste', (e) => {
+      e.clipboardData.items[0].getAsString((str) => {
+        console.log(`content is ${str}`)
+      })
+    })
+
+    let store = {
+      name: 'ks',
+      age: 15
+    }
+
+    store = new Proxy(store, {
+      set (target, key, value, proxy) {
+        console.log(`${target}   ${key}   ${value}   ${proxy}`)
+        return Reflect.set(target, key, value, proxy)
+      }
+    })
+  </script>
+</body>
+</html>
